@@ -1,5 +1,7 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show ]
 
   # GET /restaurants
   # GET /restaurants.json
@@ -14,7 +16,7 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants/new
   def new
-    @restaurant = Restaurant.new
+    @restaurant = current_user.restaurants.build
   end
 
   # GET /restaurants/1/edit
@@ -24,15 +26,13 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant = current_user.restaurants.build(restaurant_params)
 
     respond_to do |format|
       if @restaurant.save
         format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
-        format.json { render :show, status: :created, location: @restaurant }
       else
         format.html { render :new }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +43,8 @@ class RestaurantsController < ApplicationController
     respond_to do |format|
       if @restaurant.update(restaurant_params)
         format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
-        format.json { render :show, status: :ok, location: @restaurant }
       else
         format.html { render :edit }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,14 +55,18 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
     respond_to do |format|
       format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
-      @restaurant = Restaurant.find(params[:id])
+      @restaurant = Restaurant.find_by(id: params[:id])
+    end
+
+    def correct_user
+      @restaurant = current_user.pins.find_by(id: params[:id])
+      redirect_to restaurants_path, notice: "Not authorized to edit this pin" if @pin.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
