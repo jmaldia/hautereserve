@@ -65,8 +65,8 @@ class RestaurantsController < ApplicationController
     end
 
     def correct_user
-      @restaurant = current_user.pins.find_by(id: params[:id])
-      redirect_to restaurants_path, notice: "Not authorized to edit this pin" if @pin.nil?
+      @restaurant = current_user.restaurants.find_by(id: params[:id])
+      redirect_to restaurants_path, notice: "Not authorized to edit this pin" if @restaurant.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
