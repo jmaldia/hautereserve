@@ -1,28 +1,45 @@
-<h1>Restaurants</h1>
+<div class="jumbotron">
+  <h1>My Restaurants</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div id="pins" class="transitions-enabled">
+  <% @restaurants.each do |restaurant| %>
+    <% if restaurant.user == current_user %>
+      <div class="box panel panel-default">
+          <div class="panel-body">
+            <span id="restauranttitle">
+              <%= link_to restaurant.name, restaurant %>
+            </span>
 
-  <tbody>
+            <br />
 
-    <% @restaurants.each do |restaurant| %>
-      <tr>
-        <td><%= restaurant.name %></td>
-        <td><%= link_to 'Show', restaurant %></td>
-        <% if restaurant.user == current_user %>
-          <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-          <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <span>
+              <%= restaurant.description %>  
+            </span>
+
+            <br />
+
+            <span style="color: #999999;">
+              <%= restaurant.user.name if restaurant.user %>
+            </span>
+
+            <br />
+
+            <% if restaurant.user == current_user %>
+              <%= link_to edit_restaurant_path(restaurant) do %>
+                <span class="glyphicon glyphicon-edit"></span>
+                Edit
+              <% end %>
+              <%= link_to restaurant, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <span class="glyphicon glyphicon-trash"></span>
+                Delete
+            <% end %>
+          </div>
         <% end %>
-      </tr>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
+  <% end %>
+</div>
 <br>
 
-<%= link_to 'New Restaurant', new_restaurant_path %>
+<%= link_to 'New Restaurant', new_restaurant_path, class: "btn btn-primary" %>

@@ -3,17 +3,23 @@
   <head>
     <title>RestaurantappJon</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
 
   <body>
     <%= render 'layouts/header' %>
 
     <!-- This is a Flash message -->
-    <% flash.each do |name, msg| %> <%= content_tag(:div, msg, class: "alert alert-#{name}") %> <% end %>
-
-    <%= yield %>
+    <div class="container center">
+      <% flash.each do |name, msg| %> <%= content_tag(:div, msg, class: "alert alert-#{name}") %> <% end %>
+    </div>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,2 +1,9 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="jumbotron">
+  <h1>HauteReserve</h1>
+  <p>The place to make your 5 star reservations</p>
+
+  <% if !user_signed_in? %>
+    Click here to <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+  <% end %>
+</div>
+
