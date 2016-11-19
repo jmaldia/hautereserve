@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Find Restaurants", restaurants_path %></li>
-        <li><%= link_to "My Account", restaurants_path %></li>
+        <li><%= link_to "My Restaurants", pages_home_path %></li>
         <% if user_signed_in? %>
           <li>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete %>

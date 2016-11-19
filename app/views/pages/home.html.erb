@@ -1,9 +1,49 @@
 <div class="jumbotron">
-  <h1>HauteReserve</h1>
-  <p>The place to make your 5 star reservations</p>
-
-  <% if !user_signed_in? %>
-    Click here to <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
-  <% end %>
+    <h1>My Restaurants</h1>
 </div>
 
+<div id="pins" class="transitions-enabled">
+  <% if @restaurants %>
+    <% @restaurants.each do |restaurant| %>
+      <!-- # <% if restaurant.user == current_user %> -->
+        <div class="box panel panel-default">
+            <div class="panel-body">
+              <span id="restauranttitle">
+                <%= link_to restaurant.name, restaurant %>
+              </span>
+
+              <br />
+
+              <!-- <span>
+                <%= restaurant.description %>  
+              </span>
+
+              <br />
+
+              <span style="color: #999999;">
+                <%= restaurant.user.name if restaurant.user %>
+              </span>
+
+              <br /> -->
+
+              <% if restaurant.user == current_user %>
+                <%= link_to edit_restaurant_path(restaurant) do %>
+                  <span class="glyphicon glyphicon-edit"></span>
+                  Edit
+                <% end %>
+                <%= link_to restaurant, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+                  Delete
+              <% end %>
+            </div>
+          <!-- <% end %> -->
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    If you want to save restaurants, create an account!
+  <% end %>
+</div>
+<br>
+
+<%= link_to 'New Restaurant', new_restaurant_path, class: "btn btn-primary" %>

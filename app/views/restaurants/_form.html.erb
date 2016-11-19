@@ -11,18 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true  %>
+    <%= f.text_field :name, autofocus: true, class: "form-control"   %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_field :description, autofocus: true  %>
+    <%= f.text_area :description, autofocus: true, class: "form-control"   %>
   </div>
 
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary"  %>
   </div>
 <% end %>

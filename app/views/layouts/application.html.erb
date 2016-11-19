@@ -16,8 +16,11 @@
 
     <!-- This is a Flash message -->
     <div class="container center">
-      <% flash.each do |name, msg| %> <%= content_tag(:div, msg, class: "alert alert-#{name}") %> <% end %>
+      <% flash.each do |name, msg| %> 
+        <%= content_tag(:div, msg, class: "alert alert-#{name}") %> 
+      <% end %>
     </div>
+
     <div class="container">
       <%= yield %>
     </div>
