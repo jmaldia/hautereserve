@@ -36,6 +36,15 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= check_box_tag(:is_admin) %>
+    <%= label_tag(:is_admin, "Admin") %>
+    <%= check_box_tag(:is_owner) %>
+    <%= label_tag(:is_owner, "Restaurant Owner") %>
+    <%= check_box_tag(:is_patron) %>
+    <%= label_tag(:is_patron, "Restaurant Patron") %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

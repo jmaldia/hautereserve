@@ -18,12 +18,21 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: "form-control"  %>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= check_box_tag(:is_admin) %>
+    <%= label_tag(:is_admin, "Admin") %>
+    <%= check_box_tag(:is_owner) %>
+    <%= label_tag(:is_owner, "Restaurant Owner") %>
+    <%= check_box_tag(:is_patron) %>
+    <%= label_tag(:is_patron, "Restaurant Patron") %>
   </div>
 
   <div class="actions">

@@ -38,7 +38,6 @@ class RestaurantsController < ApplicationController
   end
 
   # PATCH/PUT /restaurants/1
-  # PATCH/PUT /restaurants/1.json
   def update
     respond_to do |format|
       if @restaurant.update(restaurant_params)
@@ -50,7 +49,6 @@ class RestaurantsController < ApplicationController
   end
 
   # DELETE /restaurants/1
-  # DELETE /restaurants/1.json
   def destroy
     @restaurant.destroy
     respond_to do |format|
